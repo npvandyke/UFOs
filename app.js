@@ -1,16 +1,17 @@
 // Import the data from the data.js
 const tableData = data; 
-// Reference the HTML table (which has tbody tags) using d3
+// Reference the HTML table (which has tbody tags) using D3 library 
 var tbody = d3.select("tbody");
 // Create a function to build a dynamic table 
 function buildTable(data) {
-    tbody.html(""); //clears any existing table data 
+    // Clear any existing table data 
+    tbody.html(""); 
     // Loop through each object in the data and append a row and cells for each value
     // in the row 
     data.forEach((dataRow) => {
-    //append a row to the table body
+    // Append a row to the table body
     let row = tbody.append("tr"); 
-    // loop through each field in the dataRow and add each value as a table cell (td)
+    // Loop through each field in the dataRow and add each value as a table cell (td)
     Object.values(dataRow).forEach((val) => {  
       let cell = row.append("td"); 
       cell.text(val);  
@@ -18,3 +19,26 @@ function buildTable(data) {
     );
   });
 }
+
+// Create a function to filter the table based on selected dates 
+function handleClick() {
+    // Grab the datetime value from the filter
+    let date = d3.select("#datetime").property("value");
+    let filteredData = tableData;
+  
+    // Check to see if a date was entered and filter the
+    // data using that date.
+    if (date) {
+      // Apply `filter` to the table data to only keep the
+      // rows where the `datetime` value matches the filter value
+      filteredData = filteredData.filter(row => row.datetime === date);
+    };
+    // Rebuild the table using the filtered data with the buildTable function 
+    // @NOTE: If no date was entered, then filteredData will
+    // just be the original tableData.
+    buildTable(filteredData);
+}
+// Execute the handleClick function when the button with an id of filter-btn is clicked 
+d3.selectAll("#filter-btn").on("click", handleClick);
+// Build the table when the page loads 
+buildTable(tableData);
