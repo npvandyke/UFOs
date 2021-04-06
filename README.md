@@ -15,4 +15,9 @@ Use images of your webpage during the filtering process to support your explanat
 # Summary:
 
 ## The summary addresses one drawback of this webpage (2 pt)
+
+It's static data based off a provided JavaScript file. There could be more up-to-date sightings that have happened since 
 ## The summary addresses two additional recommendations for further development (4 pt)
+
+- Provide a link to the website for the "Leave Aliens Alone" community engagement initiative mentioned on Dana's webpage 
+- Data scraping to provide more up-to-date sightings 
